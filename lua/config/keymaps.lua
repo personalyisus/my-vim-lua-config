@@ -41,6 +41,11 @@ map({ "n", "v" }, "<leader>lf", function()
 end, { desc = "Format" })
 
 
+-- for diagnostics
+map({ "n", "v" }, "<leader>cd", function()
+  vim.diagnostic.open_float()
+end, { desc = "Line diagnostics" })
+
 -- For LSP hover information
 map("n", "K", function()
   vim.lsp.buf.hover();
