@@ -138,8 +138,17 @@ return {
         -- The first entry (without a key) will be the default handler
         -- and will be called for each installed server that doesn't have
         -- a dedicated handler.
-        function(server_name)  -- default handler (optional)
-          require("lspconfig")[server_name].setup {}
+        function(server_name) -- default handler (optional)
+          require("lspconfig")[server_name].setup {
+            -- YISUSDEBUG: prettier eslint plugin recipe? https://www.lazyvim.org/configuration/recipes#add-eslint-and-use-it-for-formatting
+            on_attach = function(client)
+              if client.name == "eslint" then
+                client.server_capabilities.documentFormattingProvider = true
+              elseif client.name == "tsserver" then
+                client.server_capabilities.documentFormattingProvider = false
+              end
+            end
+          }
         end,
       }
     end
