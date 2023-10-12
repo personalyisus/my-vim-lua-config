@@ -2,8 +2,6 @@ return {
   "neovim/nvim-lspconfig",
   event = "BufEnter",
   dependencies = {
-    { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-    { "folke/neodev.nvim", opts = {} },
     "mason.nvim",
     "williamboman/mason-lspconfig.nvim",
   },
@@ -71,7 +69,9 @@ return {
       --   return true
       -- end,
       -- Specify * to use this function as a fallback for any server
-      -- ["*"] = function(server, opts) end,
+      --  ["*"] = function(server, opts) end,
+
+
     },
   },
   ---@param opts PluginLspOpts
@@ -107,6 +107,7 @@ return {
           return
         end
       end
+
       require("lspconfig")[server].setup(server_opts)
     end
 
@@ -132,6 +133,15 @@ return {
 
     if have_mason then
       mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
+      -- YISUSDEBUG: using the automatic mason-lspconfig to force servers to be setup automatically?
+      mlsp.setup_handlers {
+        -- The first entry (without a key) will be the default handler
+        -- and will be called for each installed server that doesn't have
+        -- a dedicated handler.
+        function(server_name)  -- default handler (optional)
+          require("lspconfig")[server_name].setup {}
+        end,
+      }
     end
   end,
 }
