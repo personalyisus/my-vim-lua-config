@@ -48,5 +48,31 @@ end, { desc = "Line diagnostics" })
 
 -- For LSP hover information
 map("n", "K", function()
+  -- Also displays signture help for symbols which allow it
+  vim.lsp.buf.signature_help();
   vim.lsp.buf.hover();
 end, { desc = "Show lsp hover information" })
+
+
+-- traversing to definition, declaration, type definitions..
+
+map("n", "<leader>gt", function()
+  -- Also displays signture help for symbols which allow it
+  vim.lsp.buf.type_definition();
+end, { desc = "Navitate to the type definition" })
+
+map("n", "<leader>gd", function()
+  -- Also displays signture help for symbols which allow it
+  vim.lsp.buf.definition();
+end, { desc = "Navitate to the declaration" })
+
+map("n", "<leader>gI", function()
+  -- Also displays signture help for symbols which allow it
+  vim.lsp.buf.implementation();
+end, { desc = "Navitate to the type definition" })
+
+-- Renaming??
+map("n", "<leader>cr", function()
+  -- Also displays signture help for symbols which allow it
+  vim.lsp.buf.rename();
+end, { desc = "Navitate to the type definition" })
