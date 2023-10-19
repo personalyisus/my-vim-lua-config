@@ -64,15 +64,15 @@ end, { desc = "Navitate to the type definition" })
 map("n", "<leader>gd", function()
   -- Also displays signture help for symbols which allow it
   vim.lsp.buf.definition();
-end, { desc = "Navitate to the declaration" })
+end, { desc = "Navitate to the definition" })
 
 map("n", "<leader>gI", function()
   -- Also displays signture help for symbols which allow it
   vim.lsp.buf.implementation();
-end, { desc = "Navitate to the type definition" })
+end, { desc = "Navitate to the symbol's implementation" })
 
 -- Renaming??
 map("n", "<leader>cr", function()
   -- Also displays signture help for symbols which allow it
   vim.lsp.buf.rename();
-end, { desc = "Navitate to the type definition" })
+end, { desc = "Rename the symbol under the cursor" })
