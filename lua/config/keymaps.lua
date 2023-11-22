@@ -38,6 +38,7 @@ map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 
 map({ "n", "v" }, "<leader>lf", function()
   vim.lsp.buf.format()
+  vim.cmd("Prettier")
 end, { desc = "Format" })
 
 
