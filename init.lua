@@ -21,5 +21,3 @@ vim.opt.rtp:prepend(lazypath)
 -- Propbable move these out to a keymaps file
 
 require("lazy").setup("plugins")
-
-

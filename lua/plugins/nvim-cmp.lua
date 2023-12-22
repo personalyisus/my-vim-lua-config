@@ -62,13 +62,15 @@ return {
     })
 
     -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-    cmp.setup.cmdline({ '/', '?' }, {
+-- Yisus note: disabled this for now since after a search is made and
+-- no results are found, the autocomplete is screwed up
+--[[     cmp.setup.cmdline({ '/', '?' }, {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
         { name = 'buffer' }
       }
     })
-
+ ]]
     -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
     -- TODO: Check why this is screwing with the autocomplete commands when entering a javascript file lol
     -- cmp.setup.cmdline(':', {

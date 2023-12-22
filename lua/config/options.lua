@@ -23,6 +23,9 @@ opt.termguicolors = true -- True color support
 opt.undofile = true
 opt.undolevels = 10000
 
+-- Fix for <Tab> map has been disabled or is claimed by another plugin on copilot?
+-- based on this https://www.reddit.com/r/neovim/comments/sk70rk/comment/i1vro1l/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+vim.g.copilot_assume_mapped = true
 
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
