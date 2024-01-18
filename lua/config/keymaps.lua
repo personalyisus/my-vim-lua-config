@@ -13,6 +13,9 @@ map("n", "<S-l>", ":tabn<CR>")
 map("n", "<S-h>", ":tabp<CR>")
 map("n", "<C-n>", ":tabe<CR>")
 
+-- clearing highlights, based on lunarvim defaults
+
+map("n", "<leader>h", ":nohl<CR>")
 -- based on https://www.lazyvim.org/configuration/general#keymaps
 
 -- for windows creation just do C-W_v C-W_s and C-W_q, last one to quit
