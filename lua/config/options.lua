@@ -6,6 +6,7 @@
 local opt = vim.opt
 
 vim.g.mapleader = " "
+vim.g.wrap = "nowrap"
 
 -- Values based on https://www.lazyvim.org/configuration/general#options
 opt.cursorline = true -- Enable highlighting of the current line
@@ -30,5 +31,3 @@ vim.g.copilot_assume_mapped = true
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
 end
-
-

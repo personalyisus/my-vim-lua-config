@@ -2,9 +2,8 @@ return {
   "nvimdev/dashboard-nvim",
   event = "VimEnter",
   opts = function()
-
     -- Generated on: http://www.patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
-    -- Using the font: ANSI Shadow 
+    -- Using the font: ANSI Shadow
     local logo = [[
     
 ██████╗ ███████╗██████╗ ███████╗ ██████╗ ███╗   ██╗ █████╗ ██╗     
@@ -40,7 +39,9 @@ return {
           { action = "ene | startinsert",                                        desc = " New file",        icon = " ", key = "n" },
           { action = "Telescope oldfiles",                                       desc = " Recent files",    icon = " ", key = "r" },
           { action = "Telescope live_grep",                                      desc = " Find text",       icon = " ", key = "t" },
-          { action = "edit ~/.config/nvim", desc = " Config",          icon = " ", key = "c" },
+          { action = function()
+            vim.cmd("edit ~/.config/nvim/init.lua")
+          end, desc = " Config",          icon = " ", key = "c" },
 --          { action = 'lua require("persistence").load()',                        desc = " Restore Session", icon = " ", key = "s" },
 --          { action = "LazyExtras",                                               desc = " Lazy Extras",     icon = " ", key = "x" },
           { action = "Lazy",                                                     desc = " Lazy",            icon = "󰒲 ", key = "l" },
