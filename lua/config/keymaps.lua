@@ -84,6 +84,7 @@ end, { desc = "Rename the symbol under the cursor" })
 -- Close Dashboard.nvim and edit my kua config (kinda) Suggested by Chatgpt
 -- keys based on the go to config of lunarvim
 map('n', '<leader>Lc',function()
+    vim.cmd('cd ~/.config/nvim')
     vim.cmd('edit ~/.config/nvim/init.lua')
     vim.cmd('Neotree')
 end)

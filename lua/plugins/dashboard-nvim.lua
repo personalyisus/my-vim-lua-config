@@ -40,6 +40,7 @@ return {
           { action = "Telescope oldfiles",                                       desc = " Recent files",    icon = " ", key = "r" },
           { action = "Telescope live_grep",                                      desc = " Find text",       icon = " ", key = "t" },
           { action = function()
+            vim.cmd('cd ~/.config/nvim')
             vim.cmd("edit ~/.config/nvim/init.lua")
           end, desc = " Config",          icon = " ", key = "c" },
 --          { action = 'lua require("persistence").load()',                        desc = " Restore Session", icon = " ", key = "s" },
