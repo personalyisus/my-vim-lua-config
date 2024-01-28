@@ -80,11 +80,14 @@ map("n", "<leader>cr", function()
   vim.lsp.buf.rename()
 end, { desc = "Rename the symbol under the cursor" })
 
-
 -- Close Dashboard.nvim and edit my kua config (kinda) Suggested by Chatgpt
 -- keys based on the go to config of lunarvim
-map('n', '<leader>Lc',function()
-    vim.cmd('cd ~/.config/nvim')
-    vim.cmd('edit ~/.config/nvim/init.lua')
-    vim.cmd('Neotree')
+map("n", "<leader>Lc", function()
+  vim.cmd("cd ~/.config/nvim")
+  vim.cmd("edit ~/.config/nvim/init.lua")
+  vim.cmd("Neotree")
 end)
+
+-- Some Gitsigns mappings
+
+map("n", "<leader>cb", ":Gitsigns blame_line<CR>", { desc = "View blame of line under cursor" })
