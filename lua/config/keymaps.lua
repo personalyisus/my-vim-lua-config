@@ -18,7 +18,9 @@ map("n", "<C-n>", ":$tabe<CR>")
 -- EXPERIMENTAL, MAYBE I WONT LIKE THIS:
 
 map("n", "<leader>tn", ":$tabe<CR>") -- (t)ab: open (n)ew
+map("n", "<leader>tN", ":$tabe<CR>:$tabnext #<CR>") -- (t)ab: open (n)ew
 map("n", "<leader>ts", ":$tab split<CR>") -- (t)ab: open (s)ame
+map("n", "<leader>tS", ":$tab split<CR>:$tabnext #<CR>") -- (t)ab: open (s)ame
 map("n", "<leader>tl", ":tabmove +1<CR>") -- (t)ab: move (l)ight (lmao)
 map("n", "<leader>th", ":tabmove -1<CR>") -- (t)ab: move (h)eft (rofl)
 
