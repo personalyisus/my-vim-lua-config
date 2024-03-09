@@ -9,9 +9,18 @@ map("n", "<space>q", ":q<CR>", { desc = "Quit neovim" })
 map("n", "<leader>q", ":q<CR>", { desc = "Quit neovim" })
 
 -- tab creation and movement
+-- I'm using :$tabe so I always open new tabs after the last one,
+-- so it helps with my mental organization
 map("n", "<S-l>", ":tabn<CR>")
 map("n", "<S-h>", ":tabp<CR>")
-map("n", "<C-n>", ":tabe<CR>")
+map("n", "<C-n>", ":$tabe<CR>")
+
+-- EXPERIMENTAL, MAYBE I WONT LIKE THIS:
+
+map("n", "<leader>tn", ":$tabe<CR>") -- (t)ab: open (n)ew
+map("n", "<leader>ts", ":$tab split<CR>") -- (t)ab: open (s)ame
+map("n", "<leader>tl", ":tabmove +1<CR>") -- (t)ab: move (l)ight (lmao)
+map("n", "<leader>th", ":tabmove -1<CR>") -- (t)ab: move (h)eft (rofl)
 
 -- clearing highlights, based on lunarvim defaults
 
