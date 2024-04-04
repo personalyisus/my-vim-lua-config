@@ -1,3 +1,5 @@
+-- yisustodo: I definitely can simplify the way the setup
+-- settings get passed to each server's setup/config
 return {
   "neovim/nvim-lspconfig",
   event = "BufEnter",
@@ -55,6 +57,9 @@ return {
             completion = {
               callSnippet = "Replace",
             },
+            diagnostics = {
+              globals = { "vim" },
+            },
           },
         },
       },
@@ -70,8 +75,6 @@ return {
       -- end,
       -- Specify * to use this function as a fallback for any server
       --  ["*"] = function(server, opts) end,
-
-
     },
   },
   ---@param opts PluginLspOpts
@@ -133,24 +136,28 @@ return {
 
     if have_mason then
       mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
-      -- YISUSDEBUG: using the automatic mason-lspconfig to force servers to be setup automatically?
-      mlsp.setup_handlers {
+      -- yisusnote: using the automatic mason-lspconfig to force servers to be setup automatically?
+      mlsp.setup_handlers({
         -- The first entry (without a key) will be the default handler
         -- and will be called for each installed server that doesn't have
         -- a dedicated handler.
         function(server_name) -- default handler (optional)
-          require("lspconfig")[server_name].setup {
-            -- YISUSDEBUG: prettier eslint plugin recipe? https://www.lazyvim.org/configuration/recipes#add-eslint-and-use-it-for-formatting
-            on_attach = function(client)
-              if client.name == "eslint" then
-                client.server_capabilities.documentFormattingProvider = true
-              elseif client.name == "tsserver" then
-                client.server_capabilities.documentFormattingProvider = false
-              end
+          -- Yisusnote: we will get the options for the server from the opts.servers[server_naame],
+          -- so in the case of the lua_ls server we can apply that as a default option, for example
+          local serverOptions = opts.servers[server_name] ~= nil and opts.servers[server_name] or {}
+
+          -- yisusnote: prettier eslint plugin recipe? https://www.lazyvim.org/configuration/recipes#add-eslint-and-use-it-for-formatting
+          serverOptions.on_attach = function(client)
+            if client.name == "eslint" then
+              client.server_capabilities.documentFormattingProvider = true
+            elseif client.name == "tsserver" then
+              client.server_capabilities.documentFormattingProvider = false
             end
-          }
+          end
+          -- Yisusnote: and we are applying those options here
+          require("lspconfig")[server_name].setup(serverOptions)
         end,
-      }
+      })
     end
   end,
 }
