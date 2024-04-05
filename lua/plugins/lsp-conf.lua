@@ -32,18 +32,31 @@ return {
     -- add any global capabilities here
     capabilities = {},
     -- Automatically format on save
-    autoformat = true,
+    autoformat = false,
     -- options for vim.lsp.buf.format
     -- `bufnr` and `filter` is handled by the LazyVim formatter,
     -- but can be also overridden when specified
     format = {
       formatting_options = nil,
-      timeout_ms = nil,
+      timeout_ms = 1000,
     },
     -- LSP Server Settings
     ---@type lspconfig.options
     servers = {
+      eslint = {
+        mason = false,
+        on_attach = function(client)
+          client.server_capabilities.documentFormattingProvider = false
+        end,
+      },
+      tsserver = {
+        mason = false,
+        on_attach = function(client)
+          client.server_capabilities.documentFormattingProvider = true
+        end,
+      },
       lua_ls = {
+        mason = false,
         -- mason = false, -- set to false if you don't want this server to be installed with mason
         -- Use this to add any additional keymaps
         -- for specific lsp servers
@@ -66,7 +79,7 @@ return {
     },
     -- you can do any additional lsp server setup here
     -- return true if you don't want this server to be setup with lspconfig
-    ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+    ---@type table<string, fun(serverName:string, serverOptions:_.lspconfig.options):boolean?>
     setup = {
       -- example to setup with typescript.nvim
       -- tsserver = function(_, opts)
@@ -74,7 +87,10 @@ return {
       --   return true
       -- end,
       -- Specify * to use this function as a fallback for any server
-      --  ["*"] = function(server, opts) end,
+      -- ["*"] = function(serverName, serverOptions)
+      --   require("lspconfig")[serverName].setup(serverOptions)
+      --   return true
+      -- end,
     },
   },
   ---@param opts PluginLspOpts
@@ -96,22 +112,21 @@ return {
       opts.capabilities or {}
     )
 
-    local function setup(server)
+    local function defaultSetupFunction(serverName)
       local server_opts = vim.tbl_deep_extend("force", {
         capabilities = vim.deepcopy(capabilities),
-      }, servers[server] or {})
+      }, { servers[serverName] or {} })
 
-      if opts.setup[server] then
-        if opts.setup[server](server, server_opts) then
+      if opts.setup[serverName] then
+        if opts.setup[serverName](serverName, server_opts) then
           return
         end
       elseif opts.setup["*"] then
-        if opts.setup["*"](server, server_opts) then
+        if opts.setup["*"](serverName, server_opts) then
           return
         end
       end
-
-      require("lspconfig")[server].setup(server_opts)
+      require("lspconfig")[serverName].setup(server_opts)
     end
 
     -- get all the servers that are available through mason-lspconfig
@@ -122,42 +137,20 @@ return {
     end
 
     local ensure_installed = {} ---@type string[]
-    for server, server_opts in pairs(servers) do
+    for serverName, server_opts in pairs(servers) do
       if server_opts then
         server_opts = server_opts == true and {} or server_opts
         -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-        if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
-          setup(server)
+        if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, serverName) then
+          defaultSetupFunction(serverName)
         else
-          ensure_installed[#ensure_installed + 1] = server
+          ensure_installed[#ensure_installed + 1] = serverName
         end
       end
     end
 
     if have_mason then
-      mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
-      -- yisusnote: using the automatic mason-lspconfig to force servers to be setup automatically?
-      mlsp.setup_handlers({
-        -- The first entry (without a key) will be the default handler
-        -- and will be called for each installed server that doesn't have
-        -- a dedicated handler.
-        function(server_name) -- default handler (optional)
-          -- Yisusnote: we will get the options for the server from the opts.servers[server_naame],
-          -- so in the case of the lua_ls server we can apply that as a default option, for example
-          local serverOptions = opts.servers[server_name] ~= nil and opts.servers[server_name] or {}
-
-          -- yisusnote: prettier eslint plugin recipe? https://www.lazyvim.org/configuration/recipes#add-eslint-and-use-it-for-formatting
-          serverOptions.on_attach = function(client)
-            if client.name == "eslint" then
-              client.server_capabilities.documentFormattingProvider = true
-            elseif client.name == "tsserver" then
-              client.server_capabilities.documentFormattingProvider = false
-            end
-          end
-          -- Yisusnote: and we are applying those options here
-          require("lspconfig")[server_name].setup(serverOptions)
-        end,
-      })
+      mlsp.setup({ ensure_installed })
     end
   end,
 }
