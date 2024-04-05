@@ -14,8 +14,7 @@ return {
       virtual_text = {
         spacing = 4,
         source = "if_many",
-        prefix = "●",
-        -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+        prefix = "●", -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
         -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
         -- prefix = "icons",
       },
@@ -54,7 +53,7 @@ return {
         end,
       },
       lua_ls = {
-        mason = true,
+        mason = false,
         -- mason = false, -- set to false if you don't want this server to be installed with mason
         -- Use this to add any additional keymaps
         -- for specific lsp servers
@@ -62,36 +61,16 @@ return {
         -- keys = {},
 
         -- Taken from https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
-        on_init = function(client)
-          local path = client.workspace_folders[1].name
-          if vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc") then
-            return
-          end
-
-          client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+        settings = {
+          Lua = {
             runtime = {
-              -- Tell the language server which version of Lua you're using
-              -- (most likely LuaJIT in the case of Neovim)
               version = "LuaJIT",
             },
-            -- Make the server aware of Neovim runtime files
             workspace = {
               checkThirdParty = false,
               library = {
                 vim.env.VIMRUNTIME,
-                -- Depending on the usage, you might want to add additional paths here.
-                -- "${3rd}/luv/library"
-                -- "${3rd}/busted/library",
               },
-              -- or pull in all of 'runtimepath'. NOTE: this is a lot slower
-              -- library = vim.api.nvim_get_runtime_file("", true)
-            },
-          })
-        end,
-        settings = {
-          Lua = {
-            workspace = {
-              checkThirdParty = false,
             },
             completion = {
               callSnippet = "Replace",
@@ -141,7 +120,7 @@ return {
     local function defaultSetupFunction(serverName)
       local server_opts = vim.tbl_deep_extend("force", {
         capabilities = vim.deepcopy(capabilities),
-      }, { servers[serverName] or {} })
+      }, servers[serverName] or {})
 
       if opts.setup[serverName] then
         if opts.setup[serverName](serverName, server_opts) then
@@ -152,22 +131,25 @@ return {
           return
         end
       end
+      if serverName == "lua_ls" and servers[serverName] then
+        for keyName, keyValue in pairs(server_opts) do
+          print(keyName, keyValue)
+        end
+      end
       require("lspconfig")[serverName].setup(server_opts)
     end
 
-    -- get all the servers that are available through mason-lspconfig
     local have_mason, mlsp = pcall(require, "mason-lspconfig")
-    local all_mslp_servers = {}
-    if have_mason then
-      all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
-    end
+    -- get all the servers that are available through mason-lspconfig
+    -- local all_mslp_servers = {}
+    -- if have_mason then
+    --   all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+    -- end
 
     local ensure_installed = {} ---@type string[]
     for serverName, server_opts in pairs(servers) do
       if server_opts then
-        if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, serverName) then
-          defaultSetupFunction(serverName)
-        else
+        if server_opts.mason then
           ensure_installed[#ensure_installed + 1] = serverName
         end
       end
