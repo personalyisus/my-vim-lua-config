@@ -131,11 +131,7 @@ return {
           return
         end
       end
-      if serverName == "lua_ls" and servers[serverName] then
-        for keyName, keyValue in pairs(server_opts) do
-          print(keyName, keyValue)
-        end
-      end
+
       require("lspconfig")[serverName].setup(server_opts)
     end
 
