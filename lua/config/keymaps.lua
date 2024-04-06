@@ -51,7 +51,7 @@ map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List" })
 
 map({ "n", "v" }, "<leader>lf", function()
-  require("conform").format()
+  require("conform").format({ lsp_fallack = true, async = true })
   -- previous configuration with normal format and Prettier command
   -- vim.lsp.buf.format()
   -- vim.cmd("Prettier")

@@ -1,12 +1,18 @@
 return {
-  'stevearc/conform.nvim',
+  "stevearc/conform.nvim",
   opts = {
     formatters_by_ft = {
       lua = { "stylua" },
+      rust = { "rustfmt" },
       -- Conform will run multiple formatters sequentially
-      python = { "isort", "black" },
       -- Use a sub-list to run only the first available formatter
-      ['*'] = { { "prettierd", "prettier" } },
+      ["javascript"] = { "prettier" },
+      ["javascriptreact"] = { "prettier" },
+      ["javascript.jsx"] = { "prettier" },
+      ["typescript"] = { "prettier" },
+      ["typescriptreact"] = { "prettier" },
+      ["typescript.tsx"] = { "prettier" },
+      -- ["*"] = { "prettier" },
     },
   },
 }
