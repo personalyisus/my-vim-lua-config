@@ -102,3 +102,18 @@ end)
 -- Some Gitsigns mappings
 
 map("n", "<leader>cb", ":Gitsigns blame_line<CR>", { desc = "View blame of line under cursor" })
+
+-- Neotest mappings
+
+map("n", "<leader>nc", function() -- (n)eotest (c)urrent
+  require("neotest").run.run()
+end, {desc = "Run the closes found test"})
+
+map("n", "<leader>nf", function() -- (n)eotest (f)ile
+  require("neotest").run.run(vim.fn.expand("%"))
+end, {desc = "Run the entire file of tests"})
+
+
+map("n", "<leader>ns", function() -- (n)eotest (s)ummary toggle
+  require("neotest").summary.toggle()
+end, {desc = "Open the neotest summary buffer"})
