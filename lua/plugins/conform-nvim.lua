@@ -13,6 +13,7 @@ return {
       ["typescriptreact"] = { "prettier" },
       ["astro"] = { "prettier" },
       ["scss"] = { "prettier" },
+      ["html"] = { "prettier" },
       -- ["*"] = { "prettier" },
     },
   },
