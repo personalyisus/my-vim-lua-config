@@ -4,6 +4,11 @@ return {
   -- or                              , branch = '0.1.x',
   dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-fzf-native.nvim" },
   config = function()
+    require("telescope").setup({
+      defaults= {
+        path_display = { "smart" },
+      }
+    })
     local builtin = require("telescope.builtin")
     -- We cache the results of "git rev-parse"
     -- Process creation is expensive in Windows, so this reduces latency
@@ -31,8 +36,23 @@ return {
     vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live grep in project" })
     vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Buffers" })
     vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help tags" })
-    vim.keymap.set("n", "<leader>fr", builtin.lsp_references, { desc = "Find references of the symbol under the cursor" })
-    vim.keymap.set("n", "<leader>fd", builtin.lsp_definitions, { desc = "Find definitions of the symbol under the cursor" })
-    vim.keymap.set("n", "<leader>ft", builtin.lsp_type_definitions, { desc = "Find type definitions of the symbol under the cursor" })
+    vim.keymap.set(
+      "n",
+      "<leader>fr",
+      builtin.lsp_references,
+      { desc = "Find references of the symbol under the cursor" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>fd",
+      builtin.lsp_definitions,
+      { desc = "Find definitions of the symbol under the cursor" }
+    )
+    vim.keymap.set(
+      "n",
+      "<leader>ft",
+      builtin.lsp_type_definitions,
+      { desc = "Find type definitions of the symbol under the cursor" }
+    )
   end,
 }
