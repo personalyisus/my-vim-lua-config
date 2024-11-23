@@ -122,6 +122,8 @@ return {
         capabilities = vim.deepcopy(capabilities),
       }, servers[serverName] or {})
 
+      -- Because there's nothing on opts.setup,
+      -- this is not actually doing anything???
       if opts.setup[serverName] then
         if opts.setup[serverName](serverName, server_opts) then
           return
