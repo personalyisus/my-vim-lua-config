@@ -1,10 +1,10 @@
 return {
-  {
-    "morhetz/gruvbox",
-    config = function()
-      vim.cmd.colorscheme("gruvbox")
-    end,
-  },
+  -- {
+  --   "morhetz/gruvbox",
+  --   config = function()
+  --     vim.cmd.colorscheme("gruvbox")
+  --   end,
+  -- },
   -- {
   --   "folke/tokyonight.nvim",
   --   lazy = false,
@@ -17,8 +17,12 @@ return {
   --     vim.cmd([[colorscheme tokyonight]])
   --   end,
   -- },
-  -- { "catppuccin/nvim", name = "catppuccin", priority = 1000, config = function()
-  --     vim.cmd([[colorscheme catppuccin-macchiato]])
-  --
-  -- end },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme catppuccin-macchiato]])
+    end,
+  },
 }
