@@ -2,15 +2,18 @@ return {
   "ibhagwan/fzf-lua",
   -- optional for icon support
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  -- keys = {
-  --   { "<leader>ff", "<cmd>lua require('fzf-lua').files<cr>", desc = "Find files in project" },
-  --   { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep<cr>", desc = "Live grep in project" },
-  --   { "<leader>fb", "<cmd>lua require('fzf-lua').buffers<cr>", desc = "Buffers" },
-  --   { "<leader>fh", "<cmd>lua require('fzf-lua').help_tags<cr>", desc = "Help tags" },
-  --   { "<leader>fr", "<cmd>lua require('fzf-lua').lsp_references<cr>", desc = "Find references of the symbol under the cursor" },
-  --   { "<leader>fd", "<cmd>lua require('fzf-lua').lsp_definitions<cr>", desc = "Find definitions of the symbol under the cursor" },
-  --   { "<leader>ft", "<cmd>lua require('fzf-lua').lsp_type_definitions<cr>", desc = "Find type definitions of the symbol under the cursor" },
-  -- },
+  opts = {
+    -- Taken from https://www.reddit.com/r/neovim/comments/1hhiidm/a_few_nice_fzflua_configurations_now_that_lazyvim/
+
+    oldfiles = {
+      include_current_session = true,
+    },
+    previewers = {
+      builtin = {
+        syntax_limit_b = 1024 * 100, -- 100KB
+      },
+    },
+  },
   config = function()
     -- calling `setup` is optional for customization
     require("fzf-lua").setup({})
