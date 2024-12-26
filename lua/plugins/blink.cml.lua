@@ -23,8 +23,7 @@ return {
       ["<C-n>"] = { "select_next", "fallback" },
       ["<Up>"] = { "select_prev", "fallback" },
       ["<Down>"] = { "select_next", "fallback" },
-      -- not using enter because when I do enter
-      -- I typically want to just input the word and not accept
+      ["<CR>"] = { "accept", "fallback" },
       ["<Tab>"] = { "accept", "fallback" },
     },
     fuzzy = {
