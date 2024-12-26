@@ -17,7 +17,16 @@ return {
     -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
     -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
     -- See the full "keymap" documentation for information on defining your own keymap.
-    keymap = { preset = "super-tab" },
+    keymap = {
+      preset = "super-tab",
+      ["<C-p>"] = { "select_prev", "fallback" },
+      ["<C-n>"] = { "select_next", "fallback" },
+      ["<Up>"] = { "select_prev", "fallback" },
+      ["<Down>"] = { "select_next", "fallback" },
+      -- not using enter because when I do enter
+      -- I typically want to just input the word and not accept
+      ["<Tab>"] = { "accept", "fallback" },
+    },
     fuzzy = {
       prebuilt_binaries = {
         download = true,
