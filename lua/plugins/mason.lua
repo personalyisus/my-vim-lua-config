@@ -22,6 +22,26 @@ return {
         function(server_name) -- default handler (optional)
           require("lspconfig")[server_name].setup({})
         end,
+        ["vtsls"] = function()
+          local lspconfig = require("lspconfig")
+          lspconfig.vtsls.setup({
+            filetypes = {
+              "javascript",
+              "javascriptreact",
+              "javascript.jsx",
+              "typescript",
+              "typescriptreact",
+              "typescript.tsx",
+              "svelte",
+              "jsonc",
+              "json",
+              "astro",
+            },
+            on_attach = function(client)
+              client.server_capabilities.documentFormattingProvider = true
+            end,
+          })
+        end,
         ["lua_ls"] = function()
           local lspconfig = require("lspconfig")
           lspconfig.lua_ls.setup({
