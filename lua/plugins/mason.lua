@@ -32,7 +32,6 @@ return {
               "typescript",
               "typescriptreact",
               "typescript.tsx",
-              "svelte",
               "jsonc",
               "json",
               "astro",
