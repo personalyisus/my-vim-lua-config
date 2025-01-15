@@ -40,7 +40,15 @@ return {
       -- Adjusts spacing to ensure icons are aligned
       nerd_font_variant = "mono",
     },
-
+    -- Yisusnote: Using manual completion list selection
+    -- as noted in https://cmp.saghen.dev/configuration/completion.html#list
+    -- since it got annoying trying to find something via / and then 
+    -- the list automatically opens and auto selects and item
+    completion = {
+      list = {
+        selection = { preselect = false, auto_insert = false },
+      },
+    },
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
