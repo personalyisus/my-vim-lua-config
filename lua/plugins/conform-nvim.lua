@@ -4,6 +4,7 @@ return {
     formatters_by_ft = {
       lua = { "stylua", "lua_ls" },
       rust = { "rustfmt" },
+      zig = { "zigfmt" },
       -- Conform will run multiple formatters sequentially
       -- Use a sub-list to run only the first available formatter
       ["javascript"] = { "prettier", "eslint_d" },
