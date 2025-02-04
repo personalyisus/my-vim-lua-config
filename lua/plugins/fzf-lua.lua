@@ -2,22 +2,13 @@ return {
   "ibhagwan/fzf-lua",
   -- optional for icon support
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  opts = {
-    -- Taken from https://www.reddit.com/r/neovim/comments/1hhiidm/a_few_nice_fzflua_configurations_now_that_lazyvim/
-
-    oldfiles = {
-      include_current_session = true,
-    },
-    previewers = {
-      builtin = {
-        syntax_limit_b = 1024 * 100, -- 100KB
-      },
-    },
-  },
   config = function()
     -- calling `setup` is optional for customization
-    require("fzf-lua").setup({})
-    -- vim.keymap.set("n", "<c-P>", require('fzf-lua').files, { desc = "Fzf Files" })
+    --
+    -- simplifying my life by using the telescope profile
+    -- taken from here https://github.com/ibhagwan/fzf-lua/blob/main/lua/fzf-lua/profiles/README.md
+    require("fzf-lua").setup({ "telescope" })
+    vim.keymap.set("n", "<c-P>", require("fzf-lua").files, { desc = "Fzf Files" })
     vim.keymap.set("n", "<leader>ff", require("fzf-lua").files, { desc = "Find files in project" })
     vim.keymap.set("n", "<leader>fg", require("fzf-lua").live_grep, { desc = "Live grep in project" })
     vim.keymap.set("n", "<leader>fb", require("fzf-lua").buffers, { desc = "Buffers" })
