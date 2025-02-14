@@ -5,85 +5,45 @@ return {
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate",
     opts = {
-      ensure_installed = {
-        "stylua",
-        "shfmt",
-        -- "flake8",
-      },
+      ensure_installed = { "stylua", "shfmt" },
     },
   },
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
       handlers = {
-        -- The first entry (without a key) will be the default handler
-        -- and will be called for each installed server that doesn't have
-        -- a dedicated handler.
-        function(server_name) -- default handler (optional)
+        function(server_name)
           require("lspconfig")[server_name].setup({})
         end,
-        ["vtsls"] = function()
-          local lspconfig = require("lspconfig")
-          lspconfig.vtsls.setup({
-            filetypes = {
-              "javascript",
-              "javascriptreact",
-              "javascript.jsx",
-              "typescript",
-              "typescriptreact",
-              "typescript.tsx",
-              "jsonc",
-              "json",
-              "astro",
-            },
+        vtsls = function()
+          require("lspconfig").vtsls.setup({
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "astro" },
             on_attach = function(client)
               client.server_capabilities.documentFormattingProvider = true
             end,
           })
         end,
-        ["lua_ls"] = function()
-          local lspconfig = require("lspconfig")
-          lspconfig.lua_ls.setup({
+        lua_ls = function()
+          require("lspconfig").lua_ls.setup({
+            filetypes = { "lua" },
             settings = {
               Lua = {
-                runtime = {
-                  version = "LuaJIT",
-                },
-                workspace = {
-                  checkThirdParty = false,
-                  library = {
-                    vim.env.VIMRUNTIME,
-                  },
-                },
-                completion = {
-                  callSnippet = "Replace",
-                },
-                diagnostics = {
-                  globals = { "vim" },
-                },
+                runtime = { version = "LuaJIT" },
+                workspace = { checkThirdParty = false, library = { vim.env.VIMRUNTIME } },
+                completion = { callSnippet = "Replace" },
+                diagnostics = { globals = { "vim" } },
               },
             },
           })
         end,
-        ["eslint"] = function()
-          local lspconfig = require("lspconfig")
-
-          lspconfig.eslint.setup({
+        eslint = function()
+          require("lspconfig").eslint.setup({
+            filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "astro" },
             on_attach = function(client)
               client.server_capabilities.documentFormattingProvider = false
             end,
           })
         end,
-        -- commenting out tsserver since it is not available for mason for some reason?
-        -- ["tsserver"] = function()
-        --   local lspconfig = require("lspconfig")
-        --   lspconfig.tsserver.setup({
-        --     on_attach = function(client)
-        --       client.server_capabilities.documentFormattingProvider = true
-        --     end,
-        --   })
-        -- end,
-        -- instead trying out vtsls
       },
     },
   },

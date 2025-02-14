@@ -1,7 +1,8 @@
 return {
   "saghen/blink.cmp",
+  event = "VeryLazy",
   -- optional: provides snippets for the snippet source
-  dependencies = "rafamadriz/friendly-snippets",
+  -- dependencies = "rafamadriz/friendly-snippets",
 
   -- use a release tag to download pre-built binaries
   version = "*",
@@ -42,7 +43,7 @@ return {
     },
     -- Yisusnote: Using manual completion list selection
     -- as noted in https://cmp.saghen.dev/configuration/completion.html#list
-    -- since it got annoying trying to find something via / and then 
+    -- since it got annoying trying to find something via / and then
     -- the list automatically opens and auto selects and item
     completion = {
       list = {
@@ -52,7 +53,11 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = {
+        "lsp",
+        "path", --[[ "snippets",  ]]
+        "buffer",
+      },
     },
   },
   opts_extend = { "sources.default" },

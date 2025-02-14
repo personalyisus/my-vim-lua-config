@@ -9,5 +9,4 @@ return {
       extra = true,
     },
   },
-  lazy = false,
 }

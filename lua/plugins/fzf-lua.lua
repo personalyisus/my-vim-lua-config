@@ -2,6 +2,9 @@ return {
   "ibhagwan/fzf-lua",
   -- optional for icon support
   dependencies = { "nvim-tree/nvim-web-devicons" },
+  lazy = true,
+  cmd = "FzfLua",
+  keys = { "<c-p>", "<leader>ff", "<leader>fg", "<leader>fb", "<leader>fh", "<leader>fr" },
   config = function()
     -- calling `setup` is optional for customization
     --
