@@ -7,9 +7,9 @@ if vim.env.PROF then
   vim.opt.rtp:append(snacks)
   require("snacks.profiler").startup({
     startup = {
-      event = "VimEnter", -- stop profiler on this event. Defaults to `VimEnter`
+      -- event = "VimEnter", -- stop profiler on this event. Defaults to `VimEnter`
       -- event = "UIEnter",
-      -- event = "VeryLazy",
+      event = "VeryLazy",
     },
   })
 end
@@ -46,6 +46,9 @@ vim.g.maplocalleader = "\\"
 
 -- Setup lazy.nvim
 require("lazy").setup({
+  defaults = {
+    lazy = true,
+  },
   spec = {
     -- import your plugins
     { import = "plugins" },
@@ -54,7 +57,7 @@ require("lazy").setup({
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "tokyonight" } },
   -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = { enabled = false },
   performance = {
     rtp = {
       -- disable some rtp plugins

@@ -1,5 +1,6 @@
 return {
   "numToStr/Comment.nvim",
+  event = { "BufRead" },
   -- options based on https://github.com/numToStr/Comment.nvim?tab=readme-ov-file#configuration-optional
   opts = {
     mappings = {

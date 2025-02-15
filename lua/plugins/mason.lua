@@ -10,6 +10,8 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    dependencies = { "neovim/nvim-lspconfig", "stevearc/conform.nvim" },
+    event = { "BufRead" },
     opts = {
       handlers = {
         function(server_name)
@@ -47,5 +49,8 @@ return {
       },
     },
   },
-  "neovim/nvim-lspconfig",
+  {
+    "neovim/nvim-lspconfig",
+    lazy = true,
+  },
 }
