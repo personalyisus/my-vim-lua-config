@@ -10,7 +10,13 @@ return {
     --
     -- simplifying my life by using the telescope profile
     -- taken from here https://github.com/ibhagwan/fzf-lua/blob/main/lua/fzf-lua/profiles/README.md
-    require("fzf-lua").setup({ "telescope" })
+    require("fzf-lua").setup({
+      "telescope",
+      -- yisusnote: configuring this to use my custom ripgrep config file
+      grep = {
+        RIPGREP_CONFIG_PATH = vim.env.RIPGREP_CONFIG_PATH,
+      },
+    })
     vim.keymap.set("n", "<c-P>", require("fzf-lua").files, { desc = "Fzf Files" })
     vim.keymap.set("n", "<leader>ff", require("fzf-lua").files, { desc = "Find files in project" })
     vim.keymap.set("n", "<leader>fg", require("fzf-lua").live_grep, { desc = "Live grep in project" })
