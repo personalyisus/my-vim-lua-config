@@ -2,6 +2,7 @@ return {
   "stevearc/conform.nvim",
   opts = {
     formatters_by_ft = {
+      go = { "gofmt" },
       lua = { "stylua", "lua_ls" },
       rust = { "rustfmt" },
       zig = { "zigfmt" },
