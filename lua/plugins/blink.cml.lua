@@ -27,6 +27,9 @@ return {
       ["<CR>"] = { "accept", "fallback" },
       ["<Tab>"] = { "accept", "fallback" },
     },
+    -- snippets = {
+    --   preset = "default",
+    -- },
     fuzzy = {
       prebuilt_binaries = {
         download = true,
@@ -55,8 +58,15 @@ return {
     sources = {
       default = {
         "lsp",
-        "path", --[[ "snippets",  ]]
+        "path",
+        "snippets",
         "buffer",
+      },
+    },
+    signature = {
+      enabled = true,
+      window = {
+        show_documentation = false,
       },
     },
   },
