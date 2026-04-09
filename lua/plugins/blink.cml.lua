@@ -1,10 +1,5 @@
 return {
   "saghen/blink.cmp",
-  dependencies = {
-    {
-      "Exafunction/codeium.nvim",
-    },
-  },
   event = "InsertEnter",
   -- optional: provides snippets for the snippet source
   -- dependencies = "rafamadriz/friendly-snippets",
@@ -66,10 +61,6 @@ return {
         "path",
         "snippets",
         "buffer",
-        "codeium", -- Codeium sources and provider as per https://github.com/Exafunction/windsurf.nvim?tab=readme-ov-file#blinkcmp
-      },
-      providers = {
-        codeium = { name = "Codeium", module = "codeium.blink", async = true },
       },
     },
     signature = {
