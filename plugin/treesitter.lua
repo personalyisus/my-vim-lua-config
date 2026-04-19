@@ -3,6 +3,7 @@ vim.pack.add({
   { src = gh("nvim-treesitter/nvim-treesitter") },
 })
 
+vim.schedule(function()
 require("nvim-treesitter.configs").setup({
   ensure_installed = { "typescript", "css", "javascript", "svelte" },
 
@@ -23,3 +24,4 @@ require("nvim-treesitter.configs").setup({
     additional_vim_regex_highlighting = false,
   },
 })
+end)
