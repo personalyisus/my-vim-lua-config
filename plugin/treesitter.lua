@@ -14,7 +14,7 @@ require("nvim-treesitter").install({
   "lua", "vim", "vimdoc",
   "typescript", "javascript", "tsx",
   "css", "html", "svelte", "astro",
-  "json", "jsonc", "yaml",
+  "json", "yaml",
   "rust", "go", "zig",
   "bash",
 })
