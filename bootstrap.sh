@@ -26,7 +26,7 @@ ask_install() {
   local install_cmd="$2"
   printf "\n${YELLOW}?${RESET}  ${BOLD}%s${RESET} is missing. Install it now? [Y/n] " "$label"
   read -r answer
-  case "${answer,,}" in
+  case "$(echo "$answer" | tr '[:upper:]' '[:lower:]')" in
     y|yes|"")
       printf "${DIM}  Running: %s${RESET}\n" "$install_cmd"
       eval "$install_cmd"
@@ -185,7 +185,7 @@ check_mason_pkg() {
     MISSING+=("$label")
     printf "\n${YELLOW}?${RESET}  ${BOLD}%s${RESET} is not installed via Mason. Open Neovim and run ${DIM}:MasonInstall %s${RESET}? [Y/n] " "$label" "$pkg"
     read -r answer
-    case "${answer,,}" in
+    case "$(echo "$answer" | tr '[:upper:]' '[:lower:]')" in
       y|yes|"")
         nvim -c "MasonInstall $pkg" -c "sleep 5" -c "q"
         INSTALLED+=("$label")
