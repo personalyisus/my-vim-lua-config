@@ -13,6 +13,7 @@ require("blink.cmp").setup({
     ["<Tab>"] = { "accept", "fallback" },
   },
   fuzzy = {
+    implementation = "prefer_rust",
     prebuilt_binaries = {
       download = true,
     },
