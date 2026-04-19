@@ -3,5 +3,5 @@ vim.pack.add({
 })
 
 require("hop").setup()
-vim.api.nvim_set_keymap("n", "S", ":HopChar2<cr>", { silent = true })
-vim.api.nvim_set_keymap("n", "s", ":HopWord<cr>", { silent = true })
+vim.keymap.set("n", "S", ":HopChar2<cr>", { silent = true })
+vim.keymap.set("n", "s", ":HopWord<cr>", { silent = true })

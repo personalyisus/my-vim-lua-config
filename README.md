@@ -1,9 +1,9 @@
-# 💤 LazyVim
+# Neovim Configuration
 
+Personal Neovim config built on **Neovim 0.12+** using the native `vim.pack` package manager.
 
-# My personal configuration for neovim
+## Structure
 
-
-Uses lazyvim as a package manager,
-and is configured with a mix of their recommended
-settings, as well as previous settings I have been accumulating over the years
+- `init.lua` — Entry point, loads core modules
+- `lua/config/` — Core config: options, keymaps, autocmds
+- `plugin/` — Plugin specs using `vim.pack.add()` (each file is auto-loaded)

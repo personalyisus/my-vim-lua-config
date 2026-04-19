@@ -1,7 +1,7 @@
 vim.pack.add({
   { src = gh("nvim-neo-tree/neo-tree.nvim") },
   { src = gh("nvim-lua/plenary.nvim") },
-  { src = gh("nvim-tree/nvim-web-devicons") }, -- not strictly required, but recommended
+  { src = gh("nvim-tree/nvim-web-devicons") },
   { src = gh("MunifTanjim/nui.nvim") },
 })
 
@@ -39,7 +39,7 @@ vim.api.nvim_create_autocmd("TermClose", {
 })
 
 vim.keymap.set("n", "<leader>fe", function()
-  require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+  require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
 end, { desc = "Explorer NeoTree (cwd)" })
 
 vim.keymap.set("n", "<leader>e", "<leader>fe", { desc = "Explorer NeoTree (cwd)", remap = true })

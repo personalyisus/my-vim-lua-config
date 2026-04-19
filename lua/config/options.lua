@@ -1,11 +1,11 @@
--- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
-
+-- Neovim configuration options
+-- See: https://www.lazyvim.org/configuration/general#options
 
 local opt = vim.opt
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 vim.g.wrap = "nowrap"
 
 -- Values based on https://www.lazyvim.org/configuration/general#options
@@ -24,10 +24,7 @@ opt.termguicolors = true -- True color support
 opt.undofile = true
 opt.undolevels = 10000
 
--- Fix for <Tab> map has been disabled or is claimed by another plugin on copilot?
--- based on this https://www.reddit.com/r/neovim/comments/sk70rk/comment/i1vro1l/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-vim.g.copilot_assume_mapped = true
-
+-- Neovim 0.10+ has smooth scrolling built in
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
 end
