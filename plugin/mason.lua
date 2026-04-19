@@ -8,7 +8,7 @@ require("mason").setup({ ensure_installed = { "stylua", "shfmt" } })
 
 require("mason-lspconfig").setup({
   ensure_installed = {
-    -- add servers here, mason-lspconfig will install them
+    "lua_ls",
   },
 })
 
