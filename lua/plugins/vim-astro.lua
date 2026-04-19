@@ -1,4 +1,2 @@
-return {
-  "wuelnerdotexe/vim-astro",
-  ft = "astro",
-}
+-- migrated to plugin/vim-astro.lua
+return {}

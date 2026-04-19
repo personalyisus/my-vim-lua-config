@@ -1,4 +1,2 @@
-return {
-  "rust-lang/rust.vim",
-  ft = "rust",
-}
+-- migrated to plugin/rust.lua
+return {}

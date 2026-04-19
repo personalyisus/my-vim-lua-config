@@ -1,3 +1,2 @@
-return {
-  { "lewis6991/gitsigns.nvim", event = { "BufRead" }, opts = {} },
-}
+-- migrated to plugin/gitsigns.lua
+return {}
