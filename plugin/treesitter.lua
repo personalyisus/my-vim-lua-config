@@ -8,8 +8,16 @@ vim.pack.add({
 -- opt packages need an explicit packadd to land on the rtp
 vim.cmd("packadd nvim-treesitter")
 
--- Install essential parsers (async, no-op if already installed)
-require("nvim-treesitter").install({ "typescript", "css", "javascript", "svelte" })
+-- Install parsers (async, no-op if already installed).
+-- Note: auto_install no longer exists in the new rewrite — add languages here explicitly.
+require("nvim-treesitter").install({
+  "lua", "vim", "vimdoc",
+  "typescript", "javascript", "tsx",
+  "css", "html", "svelte", "astro",
+  "json", "jsonc", "yaml",
+  "rust", "go", "zig",
+  "bash",
+})
 
 -- Enable treesitter highlighting for every filetype Neovim supports,
 -- skipping large files
