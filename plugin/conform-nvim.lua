@@ -1,6 +1,8 @@
-return {
-  "stevearc/conform.nvim",
-  opts = {
+vim.pack.add({
+  { src = gh("stevearc/conform.nvim") }
+})
+
+require("conform").setup({
     formatters_by_ft = {
       go = { "gofmt" },
       lua = { "stylua", "lua_ls" },
@@ -21,5 +23,4 @@ return {
       ["html"] = { "prettier" },
       -- ["*"] = { "prettier" },
     },
-  },
-}
+})

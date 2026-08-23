@@ -1,11 +1,8 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
+-- Custom keymaps
 
 local map = vim.keymap.set
 
-map("n", "<space>w", ":w<cr>")
-map("n", "<space>q", ":q<CR>", { desc = "Quit neovim" })
+map("n", "<leader>w", ":w<cr>", { desc = "Save file" })
 map("n", "<leader>q", ":q<CR>", { desc = "Quit neovim" })
 
 -- tab creation and movement
@@ -17,12 +14,12 @@ map("n", "<C-n>", ":$tabe<CR>")
 
 -- EXPERIMENTAL, MAYBE I WONT LIKE THIS:
 
-map("n", "<leader>tn", ":$tabe<CR>") -- (t)ab: open (n)ew
-map("n", "<leader>tN", ":$tabe<CR>:$tabnext #<CR>") -- (t)ab: open (n)ew
-map("n", "<leader>ts", ":$tab split<CR>") -- (t)ab: open (s)ame
-map("n", "<leader>tS", ":$tab split<CR>:$tabnext #<CR>") -- (t)ab: open (s)ame
-map("n", "<leader>tl", ":tabmove +1<CR>") -- (t)ab: move (l)ight (lmao)
-map("n", "<leader>th", ":tabmove -1<CR>") -- (t)ab: move (h)eft (rofl)
+map("n", "<leader>tn", ":$tabe<CR>", { desc = "Tab: open new" })
+map("n", "<leader>tN", ":$tabe<CR>:$tabnext #<CR>", { desc = "Tab: open new (keep current)" })
+map("n", "<leader>ts", ":$tab split<CR>", { desc = "Tab: open same buffer" })
+map("n", "<leader>tS", ":$tab split<CR>:$tabnext #<CR>", { desc = "Tab: open same (keep current)" })
+map("n", "<leader>tl", ":tabmove +1<CR>", { desc = "Tab: move right" })
+map("n", "<leader>th", ":tabmove -1<CR>", { desc = "Tab: move left" })
 
 -- clearing highlights, based on lunarvim defaults
 
@@ -51,10 +48,7 @@ map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List" })
 
 map({ "n", "v" }, "<leader>lf", function()
-  require("conform").format({ lsp_fallack = true, async = true })
-  -- previous configuration with normal format and Prettier command
-  -- vim.lsp.buf.format()
-  -- vim.cmd("Prettier")
+  require("conform").format({ lsp_fallback = true, async = true })
 end, { desc = "Format current buffer" })
 
 -- for diagnostics
@@ -64,7 +58,7 @@ end, { desc = "Show current line diagnostics" })
 
 -- For LSP hover information
 map("n", "K", function()
-  -- Also displays signture help for symbols which allow it
+  -- Also displays signature help for symbols which allow it
   vim.lsp.buf.signature_help()
   vim.lsp.buf.hover()
 end, { desc = "Show lsp hover information" })
@@ -73,26 +67,24 @@ end, { desc = "Show lsp hover information" })
 
 map("n", "<leader>gt", function()
   vim.lsp.buf.type_definition()
-end, { desc = "Navitate to the type definition" })
+end, { desc = "Navigate to the type definition" })
 
 map("n", "<leader>gd", function()
   vim.lsp.buf.definition()
-end, { desc = "Navitate to the definition" })
+end, { desc = "Navigate to the definition" })
 
 map("n", "<leader>gi", function()
   vim.lsp.buf.implementation()
-end, { desc = "Navitate to the symbol's implementation" })
+end, { desc = "Navigate to the symbol's implementation" })
 
 map("n", "<leader>gr", function()
   vim.lsp.buf.references()
-end, { desc = "Navitate to the symbol's references" })
--- Renaming??
+end, { desc = "Navigate to the symbol's references" })
 map("n", "<leader>cr", function()
   vim.lsp.buf.rename()
 end, { desc = "Rename the symbol under the cursor" })
 
--- Close Dashboard.nvim and edit my kua config (kinda) Suggested by Chatgpt
--- keys based on the go to config of lunarvim
+-- Open nvim config
 map("n", "<leader>Lc", function()
   vim.cmd("cd ~/.config/nvim")
   vim.cmd("edit ~/.config/nvim/init.lua")
@@ -107,7 +99,7 @@ map("n", "<leader>cb", ":Gitsigns blame_line<CR>", { desc = "View blame of line 
 
 map("n", "<leader>nc", function() -- (n)eotest (c)urrent
   require("neotest").run.run()
-end, {desc = "Run the closes found test"})
+end, {desc = "Run the closest found test"})
 
 map("n", "<leader>nf", function() -- (n)eotest (f)ile
   require("neotest").run.run(vim.fn.expand("%"))
