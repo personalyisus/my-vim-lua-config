@@ -6,7 +6,7 @@ local opt = vim.opt
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-vim.g.wrap = "nowrap"
+vim.opt.wrap = false
 
 -- Values based on https://www.lazyvim.org/configuration/general#options
 opt.cursorline = true -- Enable highlighting of the current line

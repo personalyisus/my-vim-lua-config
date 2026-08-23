@@ -5,7 +5,7 @@ vim.pack.add({
 require("conform").setup({
     formatters_by_ft = {
       go = { "gofmt" },
-      lua = { "stylua", "lua_ls" },
+      lua = { "stylua" },
       rust = { "rustfmt" },
       zig = { "zigfmt" },
       -- Conform will run multiple formatters sequentially
@@ -16,8 +16,8 @@ require("conform").setup({
       ["typescript"] = { "prettier", "eslint_d" },
       ["typescriptreact"] = { "prettier", "eslint_d" },
       ["svelte"] = { "prettier" },
-      ["jsonc"] = { "fixjson", "jsonls" },
-      ["json"] = { "fixjson", "jsonls" },
+      ["jsonc"] = { "fixjson" },
+      ["json"] = { "fixjson" },
       ["astro"] = { "prettier" },
       ["scss"] = { "prettier" },
       ["html"] = { "prettier" },
